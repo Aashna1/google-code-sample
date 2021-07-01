@@ -23,7 +23,7 @@ class VideoPlayer:
         """Returns all videos."""
         all_videos = self._video_library.get_all_videos()
         print("Here's a list of all available videos:")
-        video_list=[]
+        video_list = []
         for val in all_videos:
             ts = "["
             for t in val.tags:
@@ -204,12 +204,14 @@ class VideoPlayer:
 
         if self._video_playlist:
             print("Showing all playlists:")
+            list = []
             for key in self._video_playlist.keys():
-                print(self._video_playlist.get(key))
+                list.append(self._video_playlist[key].name)
+            for i in list[::-1]:
+                print(i)
+
         else:
             print("No playlists exist yet")
-
-
 
     def show_playlist(self, playlist_name):
         """Display all videos in a playlist with a given name.
@@ -217,7 +219,12 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
-        print("show_playlist needs implementation")
+        playlist_name_old = playlist_name
+        if playlist_name.lower() not in (name.lower for name in self._video_playlist.keys()):
+            print(f"Cannot show playlist {playlist_name_old}: Playlist does not exist")
+        else:
+            print(f"Showing playlist: {playlist_name_old}")
+            if self._video_playlist == 
 
     def remove_from_playlist(self, playlist_name, video_id):
         """Removes a video to a playlist with a given name.
